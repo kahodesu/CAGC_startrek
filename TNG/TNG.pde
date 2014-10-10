@@ -25,7 +25,7 @@ Minim trigger example that plays Star Trek Com Badge when you hit A on keyboard.
   * for long sounds (like entire songs, for example) because the entire file is
   * kept in memory.
   * <p>
-  * Use 'k' and 's' to trigger a kick drum sample and a snare sample, respectively. 
+  * Use 'k' and 's' to trigger a combadge drum sample and a snare sample, respectively. 
   * You will see their waveforms drawn when they are played back.
   * <p>
   * For more information about Minim and additional features, 
@@ -36,7 +36,6 @@ import ddf.minim.*;
 
 Minim minim;
 AudioSample combadge;
-AudioSample snare;
 
 void setup()
 {
@@ -59,11 +58,10 @@ void setup()
   // the buffer size.
   
   // if a file doesn't exist, loadSample will return null
-  if ( kick == null ) println("Didn't get kick!");
+  if ( combadge == null ) println("Didn't get combadge!");
   
   // load SD.wav from the data folder
-  snare = minim.loadSample("SD.wav", 512);
-  if ( snare == null ) println("Didn't get snare!");
+ 
 }
 
 void draw()
@@ -72,18 +70,17 @@ void draw()
   stroke(255);
   
   // use the mix buffer to draw the waveforms.
-  for (int i = 0; i < kick.bufferSize() - 1; i++)
+  for (int i = 0; i < combadge.bufferSize() - 1; i++)
   {
     float x1 = map(i, 0, combadge.bufferSize(), 0, width);
     float x2 = map(i+1, 0, combadge.bufferSize(), 0, width);
     line(x1, 50 - combadge.mix.get(i)*50, x2, 50 - combadge.mix.get(i+1)*50);
-    line(x1, 150 - snare.mix.get(i)*50, x2, 150 - snare.mix.get(i+1)*50);
+ 
   }
 }
 
 void keyPressed() 
 {
-  if ( key == 's' ) snare.trigger();
   if ( key == 'a' ) combadge.trigger();
 }
 
