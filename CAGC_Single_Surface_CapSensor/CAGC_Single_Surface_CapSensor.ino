@@ -45,6 +45,7 @@ void loop()
     long total1 = 0;
     long start = millis();
     long total = pins.readPin(2000);
+    //Serial.println(total); //UNCOMMENT IF YOU WANT TO SEE VALUES
 
     // check if we are sensing that a finger is touching the pad
     // and that it wasnt already pressed
